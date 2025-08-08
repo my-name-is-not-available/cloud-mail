@@ -6,7 +6,9 @@ const r2Service = {
 		const formData = new FormData();
 		const blob = new Blob([content], { type: metadata?.contentType || 'application/octet-stream' });
 		formData.append('key', key);
-		formData.append('file', blob, key);
+		
+		const filename = key.split('/').pop();
+		formData.append('file', blob, filename);
 
 		const response = await fetch(`${r2Domain}/upload`, {
 			method: 'POST',
