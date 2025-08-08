@@ -4,8 +4,9 @@ const r2Service = {
 	async putObj(c, key, content, metadata) {
 		const { r2Domain } = await settingService.query(c);
 		const formData = new FormData();
+		const blob = new Blob([content], { type: metadata?.contentType || 'application/octet-stream' });
 		formData.append('key', key);
-		formData.append('file', content);
+		formData.append('file', blob, key);
 
 		const response = await fetch(`${r2Domain}/upload`, {
 			method: 'POST',
