@@ -147,7 +147,7 @@ export async function email(message, env, ctx) {
 			attachment.accountId = emailRow.accountId;
 		});
 
-		if (attachments.length > 0 && env.r2) {
+		if (attachments.length > 0 && r2Domain) {
 			await attService.addAtt({ env }, attachments);
 		}
 

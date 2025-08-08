@@ -145,7 +145,7 @@ const attService = {
 		const existKeys = existAttRows.map(attRow => attRow.key);
 		const delKeyList = keys.filter(key => !existKeys.includes(key));
 		if (delKeyList.length > 0) {
-			await c.env.r2.delete(delKeyList);
+			// await c.env.r2.delete(delKeyList);
 		}
 
 		if (attList.length >= 99) {

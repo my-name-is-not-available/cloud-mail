@@ -164,7 +164,7 @@ const emailService = {
 			throw new BizError(t('noOsDomainSendPic'));
 		}
 
-		if (attDataList.length > 0 && !c.env.r2) {
+		if (attDataList.length > 0 && !r2Domain) {
 			throw new BizError(t('noOsSendPic'));
 		}
 
@@ -172,7 +172,7 @@ const emailService = {
 			throw new BizError(t('noOsDomainSendAtt'));
 		}
 
-		if (attachments.length > 0 && !c.env.r2) {
+		if (attachments.length > 0 && !r2Domain) {
 			throw new BizError(t('noOsSendAtt'));
 		}
 
@@ -341,8 +341,9 @@ const emailService = {
 				if (attDataList.length > 0) {
 					await attService.saveArticleAtt(c, attDataList, userId, accountId, emailRow.emailId);
 				}
-
-				if (attachments?.length > 0 && c.env.r2) {
+				
+				const { r2Domain } = await settingService.query(c)
+				if (attachments?.length > 0 && r2Domain) {
 					await attService.saveSendAtt(c, attachments, userId, accountId, emailRow.emailId);
 				}
 

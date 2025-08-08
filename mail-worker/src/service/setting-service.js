@@ -80,7 +80,8 @@ const settingService = {
 
 		if (background && !background.startsWith('http')) {
 
-			if (!c.env.r2) {
+			const {r2Domain} = settingRow;
+			if (!r2Domain) {
 				throw new BizError(t('noOsUpBack'));
 			}
 
